@@ -1,7 +1,12 @@
 import NextAuth, { CredentialsSignin } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
+import { redirect } from "next/navigation"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    pages: {
+        signIn: "/sign-in",
+        newUser: "/sign-up"
+    },
     providers: [
         Credentials({
             credentials: {
@@ -14,6 +19,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     label: "Password",
                     type: "password",
                     placeholder: "********"
+                },
+                number: {
+                    label: "Number",
+                    type: "text",
+                    placeholder: "123456"
                 }
             },
 
@@ -21,6 +31,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 const { email, password } = credentials
 
                 if (email === "me@gmail.com" && password === "123456") {
+
+                    redirect("/dashboard")
+
                     return {
                         id: 1,
                         name: "Me",

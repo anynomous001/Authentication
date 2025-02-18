@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, FormHTMLAttributes, ReactNode } from "react";
 import AuthSubmitButton from "./AuthSubmitButton";
 import Link from "next/link";
 
@@ -7,6 +7,7 @@ interface Props {
     btnLabel: string;
     title?: string;
     children: ReactNode;
+    action: FormHTMLAttributes<HTMLFormElement>["action"];
     footerItems?: { label: string; linkText: string; link: string }[];
 }
 
@@ -16,10 +17,13 @@ const AuthForm: FC<Props> = ({
     error,
     children,
     footerItems,
+    action,
 }) => {
     return (
-        <div className="space-y-6 max-w-96 mx-auto pt-20 sm:p-0 p-4">
-            <form className="space-y-4">
+        <div className=" space-y-6 max-w-96 mx-auto pt-20 sm:p-0 p-4">
+            <form
+                action={action}
+                className="space-y-4">
                 <h1 className="text-2xl">{title}</h1>
                 <div>{error ? <p className="text-red-500">{error}</p> : null}</div>
                 {children}
@@ -42,7 +46,7 @@ const AuthForm: FC<Props> = ({
                 {footerItems?.map((item, index) => {
                     return (
                         <div key={index} className="flex items-center space-x-3">
-                            <span className="font-semibold">{item.label}:</span>
+                            <span className="font-semibold">{item.label} :</span>
                             <Link className="hover:underline" href={item.link}>
                                 {item.linkText}
                             </Link>
