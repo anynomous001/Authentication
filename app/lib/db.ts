@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 
-const url = process.env.MONGODB_URI
+const url = process.env.MONGODB_URL
 
 if (!url) {
-    throw new Error("MONGODB_URI is not set")
+    throw new Error("MONGODB_URL is not set")
 }
 let connection: typeof mongoose;
 

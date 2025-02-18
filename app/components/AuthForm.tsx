@@ -7,7 +7,7 @@ interface Props {
     btnLabel: string;
     title?: string;
     children: ReactNode;
-    action: FormHTMLAttributes<HTMLFormElement>["action"];
+    action?: FormHTMLAttributes<HTMLFormElement>["action"];
     footerItems?: { label: string; linkText: string; link: string }[];
 }
 

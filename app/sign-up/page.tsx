@@ -24,13 +24,13 @@ const SignUp: FC<props> = () => {
                 ]} >
 
                 <Label htmlFor="name">Name</Label>
-                <Input id='name' placeholder='John Doe' type='name' />
+                <Input id='name' placeholder='John Doe' name='name' type='name' />
 
                 <Label htmlFor="email">Email</Label>
-                <Input id='email' placeholder='John@gmail.com' type='email' />
+                <Input id='email' placeholder='John@gmail.com' name='email' type='email' />
 
                 <Label htmlFor="password">Password</Label>
-                <Input id='password' placeholder='******' type='password' />
+                <Input id='password' placeholder='******' name='password' type='password' />
 
             </AuthForm>
         </div>)

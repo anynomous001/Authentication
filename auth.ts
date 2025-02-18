@@ -26,23 +26,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     placeholder: "123456"
                 }
             },
-            edentials: any) {
+
+            async authorize(credentials: any) {
                 const { email, password } = credentials
-            async authorize(cr
 
-                if(email === "me@gmail.com" && password === "123456") {
+                if (email === "me@gmail.com" && password === "123456") {
 
-        redirect("/dashboard")
+                    redirect("/dashboard")
 
-return {
-    id: 1,
-    name: "Me",
-    email: "me@gmail.com",
-}
+                    return {
+                        id: 1,
+                        name: "Me",
+                        email: "me@gmail.com",
+                    }
                 }
 
 
-throw new CredentialsSignin("Invalid email or password")
+                throw new CredentialsSignin("Invalid email or password")
             }
         })
 
