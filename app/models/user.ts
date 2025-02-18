@@ -31,24 +31,30 @@ interface Methods {
     compare(password: string): boolean;
 }
 
-const schema = new Schema<BaseUser>({
+const schema = new Schema<BaseUser>(
+    {
 
-    name: { type: String, trim: true, required: true },
-    email: { type: String, trim: true, required: true, unique: true },
-    password: { type: String },
-    provider: {
-        type: String,
-        enum: ["credentials", "google"],
-        required: true
+
+        name: { type: String, trim: true, required: true },
+        email: { type: String, trim: true, required: true, unique: true },
+        password: { type: String },
+        provider: {
+            type: String,
+            enum: ["credentials", "google"],
+            required: true
+        },
+        avatar: {
+            type: Object,
+            _id: { type: String },
+            url: { type: String }
+        },
+        verified: { type: Boolean, default: false }
+
     },
-    avatar: {
-        type: Object,
-        _id: { type: String },
-        url: { type: String }
-    },
-    verified: { type: Boolean, default: false },
-    timestamps: true
-});
+    {
+        timestamps: true,
+    }
+);
 
 
 export const createNewUser = async (userinfo: User) => {

@@ -2,15 +2,17 @@ import React, { FC } from 'react'
 import AuthForm from '../components/AuthForm'
 import { Input } from "@/components/ui/input"
 import { Label } from '@/components/ui/label'
+import { signUp } from '@/app/actions/auth'
 
 
 interface props { }
 
 
-const signUp: FC<props> = () => {
+const SignUp: FC<props> = () => {
     return (
         <div>
             <AuthForm
+                action={signUp}
                 title="Sign Up"
                 btnLabel='Sign Up'
                 footerItems={[
@@ -35,4 +37,4 @@ const signUp: FC<props> = () => {
 }
 
 
-export default signUp
+export default SignUp
