@@ -12,10 +12,15 @@ const signUpSchema = z.object({
 
 type SignUpData = z.infer<typeof signUpSchema>;
 
+interface AuthResponse {
+    error?: string;
+    errors?: Record<string, string[] | undefined>;
+    success?: boolean;
+}
+
+export const signUp = async (state: AuthResponse, data: FormData): Promise<AuthResponse> => {
 
 
-export const signUp = async (data: FormData) => {
-    console.log([...data.entries()] + 'jnjnj'); // Log all entries in FormData
 
     const result = signUpSchema.safeParse({
         name: data.get('name'),
@@ -26,17 +31,17 @@ export const signUp = async (data: FormData) => {
     const email = data.get('email')
     const password = data.get('password')
 
-    console.log({ name, email, password }); // Log individual fields
+    console.log({ name, email, password });
 
     let user: any
 
     if (!result.success) {
-        console.log(result.error.formErrors.fieldErrors)
+        return ({ success: false, errors: result.error.formErrors.fieldErrors })
     } else {
-        const { name, email, password } = result.data
         await connectDd()
+        const { name, email, password } = result.data
         user = await createNewUser({ name, email, password, verified: false, provider: "credentials" })
-        console.log(user)
+        return ({ success: true })
     }
 
 }

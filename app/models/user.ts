@@ -1,5 +1,7 @@
 import { Schema, ObjectId, models, model } from 'mongoose';
 
+import { hashSync, compareSync, genSaltSync } from 'bcrypt'
+
 interface BaseUser {
     _id?: ObjectId;
     name: string;
@@ -31,7 +33,7 @@ interface Methods {
     compare(password: string): boolean;
 }
 
-const schema = new Schema<BaseUser>(
+const schema = new Schema<BaseUser, {}, Methods>(
     {
 
 
@@ -56,6 +58,22 @@ const schema = new Schema<BaseUser>(
     }
 );
 
+
+schema.pre('save', function () {
+    if (this.password && this.provider === 'credentials' && this.isModified('password')) {
+        this.password = hashSync(this.password, genSaltSync(10))
+
+    }
+})
+
+
+schema.methods.compare = function (password) {
+    if (this.password && this.provider === 'credentials') {
+        return compareSync(password, this.password)
+    }
+
+    return false
+}
 
 export const createNewUser = async (userinfo: User) => {
     try {

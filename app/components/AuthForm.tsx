@@ -20,7 +20,7 @@ const AuthForm: FC<Props> = ({
     action,
 }) => {
     return (
-        <div className=" space-y-6 max-w-96 mx-auto pt-20 sm:p-0 p-4">
+        <div className=" space-y-5 max-w-96 mx-auto pt-20 sm:p-0 p-4">
             <form
                 action={action}
                 className="space-y-4">
